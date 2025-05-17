@@ -1,5 +1,13 @@
+
 import { useEffect, useRef } from "react";
 import { FARM_LOCATIONS } from "@/lib/constants";
+
+// We need to declare the global Leaflet type
+declare global {
+  interface Window {
+    L: any;
+  }
+}
 
 type MapProps = {
   highlightedFarmId?: number;
@@ -20,7 +28,7 @@ const Map = ({
     const loadMap = async () => {
       try {
         // Check if Leaflet is available
-        if (typeof L === "undefined") {
+        if (typeof window.L === "undefined") {
           // Load Leaflet CSS and JS dynamically
           const cssLink = document.createElement("link");
           cssLink.rel = "stylesheet";
@@ -44,9 +52,11 @@ const Map = ({
     // Initialize map with Leaflet
     const initializeMap = () => {
       if (!mapContainer.current) return;
-
+      
       // Ensure L is defined
-      if (typeof L === "undefined") return;
+      if (typeof window.L === "undefined") return;
+      
+      const L = window.L;
 
       // Create map centered on Vichada, Colombia
       const map = L.map(mapContainer.current).setView([4.5, -70.1], 9);
