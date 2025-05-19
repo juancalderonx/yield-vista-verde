@@ -1,3 +1,4 @@
+
 import {
   Card,
   CardContent,
@@ -47,7 +48,7 @@ const UserPanel = () => {
       title: "Amplía tu inversión",
       description: "Aumenta tu portafolio de marañón y maximiza tus retornos",
       actionText: "Comprar árboles",
-      link: "/dashboard/portfolio",
+      link: "/dashboard/purchase",
       color: "bg-green-50 border-green-200",
       icon: <Trees className="h-6 w-6 text-green-600" />,
     },
@@ -86,19 +87,20 @@ const UserPanel = () => {
   ];
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <h2 className="text-3xl font-bold text-gray-900">
+          <h2 className="text-2xl font-bold text-gray-900">
             Bienvenido, {user.name}
           </h2>
-          <p className="text-gray-500 mt-1">
+          <p className="text-gray-500 text-sm mt-1">
             Último acceso: {lastLoginDate} · Resumen de tu inversión
           </p>
         </div>
         <Button
           asChild
-          className="bg-green-600 hover:bg-green-700 text-white"
+          size="sm"
+          className="bg-green-600 hover:bg-green-700 text-white self-start"
         >
           <Link to="/dashboard/purchase">
             Ampliar inversión <ArrowRight className="ml-2 h-4 w-4" />
@@ -106,36 +108,34 @@ const UserPanel = () => {
         </Button>
       </div>
 
-      {/* Investment Summary */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {/* Investment Summary Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card className="bg-gradient-to-br from-green-600 to-green-700 text-white">
-          <CardHeader className="pb-2">
-            <CardDescription className="text-green-100 font-medium">
+          <CardHeader className="pb-2 pt-4">
+            <CardDescription className="text-green-100 font-medium text-xs">
               Inversión total
             </CardDescription>
-            <CardTitle className="text-3xl">
-              {formatCurrency(user.investment)}
-            </CardTitle>
+            <CardTitle className="text-2xl">{formatCurrency(user.investment)}</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-green-100">
+            <p className="text-green-100 text-xs">
               Tu inversión está creciendo a un ritmo anual proyectado del 13.5%
             </p>
           </CardContent>
         </Card>
 
         <Card>
-          <CardHeader className="pb-2">
-            <CardDescription>Árboles de marañón</CardDescription>
+          <CardHeader className="pb-2 pt-4">
+            <CardDescription className="text-xs">Árboles de marañón</CardDescription>
             <div className="flex items-baseline">
-              <CardTitle className="text-3xl text-green-700">
+              <CardTitle className="text-2xl text-green-700">
                 {totalTrees.toLocaleString()}
               </CardTitle>
-              <span className="ml-2 text-sm text-gray-500">unidades</span>
+              <span className="ml-2 text-xs text-gray-500">unidades</span>
             </div>
           </CardHeader>
           <CardContent>
-            <div className="flex items-center text-sm">
+            <div className="flex items-center text-xs">
               <Trees className="h-4 w-4 mr-1 text-green-600" />
               <span>Tus árboles crecen sanos en el Vichada</span>
             </div>
@@ -143,21 +143,21 @@ const UserPanel = () => {
         </Card>
 
         <Card>
-          <CardHeader className="pb-2">
-            <CardDescription>Hectáreas totales</CardDescription>
+          <CardHeader className="pb-2 pt-4">
+            <CardDescription className="text-xs">Hectáreas totales</CardDescription>
             <div className="flex items-baseline">
-              <CardTitle className="text-3xl text-green-700">
+              <CardTitle className="text-2xl text-green-700">
                 {totalHectares}
               </CardTitle>
-              <span className="ml-2 text-sm text-gray-500">ha</span>
+              <span className="ml-2 text-xs text-gray-500">ha</span>
             </div>
           </CardHeader>
           <CardContent>
             <Link
               to="/dashboard/farms"
-              className="text-green-600 text-sm flex items-center hover:underline"
+              className="text-green-600 text-xs flex items-center hover:underline"
             >
-              Ver tus fincas <ArrowRight className="h-4 w-4 ml-1" />
+              Ver tus fincas <ArrowRight className="h-3 w-3 ml-1" />
             </Link>
           </CardContent>
         </Card>
@@ -165,14 +165,14 @@ const UserPanel = () => {
 
       {/* Performance Chart */}
       <Card>
-        <CardHeader>
-          <CardTitle>Proyección de rendimiento a 10 años</CardTitle>
-          <CardDescription>
+        <CardHeader className="pb-2">
+          <CardTitle className="text-lg">Proyección de rendimiento a 10 años</CardTitle>
+          <CardDescription className="text-xs">
             Estimación del crecimiento de tu inversión en el tiempo
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="h-80">
+          <div className="h-72">
             <ChartContainer
               config={{
                 investment: {
@@ -188,6 +188,7 @@ const UserPanel = () => {
                     tickLine={false}
                     axisLine={false}
                     tickFormatter={(value) => `Año ${value}`}
+                    fontSize={11}
                   />
                   <YAxis
                     tickLine={false}
@@ -195,15 +196,17 @@ const UserPanel = () => {
                     tickFormatter={(value) =>
                       formatCurrency(value).split(".")[0]
                     }
+                    fontSize={11}
+                    width={60}
                   />
                   <Line
                     type="monotone"
                     dataKey="value"
                     stroke="#16a34a"
-                    strokeWidth={3}
+                    strokeWidth={2}
                     name="investment"
-                    dot={{ r: 4 }}
-                    activeDot={{ r: 6 }}
+                    dot={{ r: 3 }}
+                    activeDot={{ r: 5 }}
                   />
                   <ChartTooltip
                     content={({ active, payload }) => {
@@ -239,31 +242,31 @@ const UserPanel = () => {
             </ChartContainer>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 mt-6">
-            <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-              <p className="text-sm font-medium text-gray-500">Año 3</p>
-              <p className="text-2xl font-bold text-gray-800">
+          <div className="grid grid-cols-3 gap-4 mt-4">
+            <div className="bg-green-50 p-3 rounded-lg border border-green-100">
+              <p className="text-xs font-medium text-gray-500">Año 3</p>
+              <p className="text-lg font-bold text-gray-800">
                 {formatCurrency(user.investment * 1.08)}
               </p>
-              <p className="text-sm font-medium text-green-600">
+              <p className="text-xs font-medium text-green-600">
                 +8% acumulado
               </p>
             </div>
-            <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-              <p className="text-sm font-medium text-gray-500">Año 5</p>
-              <p className="text-2xl font-bold text-gray-800">
+            <div className="bg-green-50 p-3 rounded-lg border border-green-100">
+              <p className="text-xs font-medium text-gray-500">Año 5</p>
+              <p className="text-lg font-bold text-gray-800">
                 {formatCurrency(user.investment * 1.47)}
               </p>
-              <p className="text-sm font-medium text-green-600">
+              <p className="text-xs font-medium text-green-600">
                 +47% acumulado
               </p>
             </div>
-            <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-              <p className="text-sm font-medium text-gray-500">Año 10</p>
-              <p className="text-2xl font-bold text-gray-800">
+            <div className="bg-green-50 p-3 rounded-lg border border-green-100">
+              <p className="text-xs font-medium text-gray-500">Año 10</p>
+              <p className="text-lg font-bold text-gray-800">
                 {formatCurrency(user.investment * 3.55)}
               </p>
-              <p className="text-sm font-medium text-green-600">
+              <p className="text-xs font-medium text-green-600">
                 +255% acumulado
               </p>
             </div>
@@ -273,16 +276,16 @@ const UserPanel = () => {
 
       {/* Next Steps */}
       <div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-4">
+        <h3 className="text-lg font-semibold text-gray-900 mb-3">
           Próximos pasos
         </h3>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-4">
           {nextStepsCards.map((card, index) => (
             <Card key={index} className={`${card.color} border`}>
-              <CardHeader className="pb-2 flex flex-row items-start justify-between">
+              <CardHeader className="pb-2 pt-4 flex flex-row items-start justify-between">
                 <div>
-                  <CardTitle className="text-lg">{card.title}</CardTitle>
-                  <CardDescription>{card.description}</CardDescription>
+                  <CardTitle className="text-base">{card.title}</CardTitle>
+                  <CardDescription className="text-xs">{card.description}</CardDescription>
                 </div>
                 <div className="rounded-full p-2 bg-white bg-opacity-70">
                   {card.icon}
@@ -291,10 +294,11 @@ const UserPanel = () => {
               <CardContent>
                 <Button
                   asChild
-                  className="mt-2 bg-white text-gray-800 hover:bg-gray-100 border border-gray-200"
+                  size="sm"
+                  className="mt-1 bg-white text-gray-800 hover:bg-gray-100 border border-gray-200 text-xs"
                 >
                   <Link to={card.link}>
-                    {card.actionText} <ArrowRight className="ml-2 h-4 w-4" />
+                    {card.actionText} <ArrowRight className="ml-1 h-3 w-3" />
                   </Link>
                 </Button>
               </CardContent>
@@ -305,28 +309,27 @@ const UserPanel = () => {
 
       {/* News and Important Updates */}
       <div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-          <Bell className="mr-2 h-5 w-5 text-amber-500" /> Noticias y
-          actualizaciones
+        <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+          <Bell className="mr-2 h-4 w-4 text-amber-500" /> Noticias y actualizaciones
         </h3>
-        <div className="space-y-4">
+        <div className="space-y-3">
           {newsItems.map((item, index) => (
             <Card key={index}>
-              <CardHeader className="pb-2 flex flex-row items-center">
+              <CardHeader className="pb-1 pt-3 flex flex-row items-center">
                 <div>
                   <div className="flex items-center">
-                    <Info className="h-4 w-4 text-blue-500 mr-2" />
-                    <CardTitle className="text-lg">{item.title}</CardTitle>
+                    <Info className="h-3 w-3 text-blue-500 mr-2" />
+                    <CardTitle className="text-base">{item.title}</CardTitle>
                   </div>
-                  <CardDescription>
+                  <CardDescription className="text-xs">
                     {new Date(item.date).toLocaleDateString("es-CO")}
                   </CardDescription>
                 </div>
               </CardHeader>
-              <CardContent>
-                <p className="text-gray-700">{item.description}</p>
-                <Button variant="link" className="p-0 mt-2 h-auto">
-                  Leer más <ArrowRight className="ml-1 h-4 w-4" />
+              <CardContent className="pt-2">
+                <p className="text-gray-700 text-sm">{item.description}</p>
+                <Button variant="link" className="p-0 mt-1 h-auto text-xs">
+                  Leer más <ArrowRight className="ml-1 h-3 w-3" />
                 </Button>
               </CardContent>
             </Card>

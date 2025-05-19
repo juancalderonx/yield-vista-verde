@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import {
   Card,
@@ -100,16 +101,17 @@ const Portfolio = () => {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h2 className="text-3xl font-bold text-gray-900">Mi Portafolio</h2>
-          <p className="text-gray-500 mt-1">
+          <h2 className="text-2xl font-bold text-gray-900">Mi Portafolio</h2>
+          <p className="text-gray-500 mt-1 text-sm">
             Detalle de tus inversiones en árboles de marañón
           </p>
         </div>
         <div className="flex gap-2">
           <Button
+            size="sm"
             variant={viewMode === "list" ? "default" : "outline"}
             onClick={() => setViewMode("list")}
             className={viewMode === "list" ? "bg-green-600 hover:bg-green-700" : ""}
@@ -117,6 +119,7 @@ const Portfolio = () => {
             Vista Lista
           </Button>
           <Button
+            size="sm"
             variant={viewMode === "map" ? "default" : "outline"}
             onClick={() => setViewMode("map")}
             className={viewMode === "map" ? "bg-green-600 hover:bg-green-700" : ""}
@@ -151,14 +154,14 @@ const Portfolio = () => {
         <>
           {/* Investment Summary Card */}
           <Card>
-            <CardHeader>
-              <CardTitle>Resumen de Inversiones</CardTitle>
-              <CardDescription>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-lg">Resumen de Inversiones</CardTitle>
+              <CardDescription className="text-xs">
                 Visualiza el rendimiento esperado de tus inversiones por finca
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="h-80">
+              <div className="h-64">
                 <ChartContainer
                   config={{
                     original: {
@@ -173,13 +176,15 @@ const Portfolio = () => {
                 >
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={returnByFarmData}>
-                      <XAxis dataKey="name" tickLine={false} axisLine={false} />
+                      <XAxis dataKey="name" tickLine={false} axisLine={false} fontSize={11} />
                       <YAxis
                         tickLine={false}
                         axisLine={false}
                         tickFormatter={(value) =>
                           formatCurrency(value).split(".")[0]
                         }
+                        fontSize={11}
+                        width={60}
                       />
                       <Bar
                         dataKey="original"
@@ -235,98 +240,91 @@ const Portfolio = () => {
 
           {/* Investments Table */}
           <Card>
-            <CardHeader>
+            <CardHeader className="pb-2">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                 <div>
-                  <CardTitle>Mis Inversiones</CardTitle>
-                  <CardDescription>
+                  <CardTitle className="text-lg">Mis Inversiones</CardTitle>
+                  <CardDescription className="text-xs">
                     Listado completo de tus inversiones por finca
                   </CardDescription>
                 </div>
-                <Button variant="outline" size="sm" className="gap-1 self-start">
-                  <Filter className="h-4 w-4" /> Filtrar
+                <Button variant="outline" size="sm" className="gap-1 self-start text-xs">
+                  <Filter className="h-3 w-3" /> Filtrar
                 </Button>
               </div>
             </CardHeader>
-            <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Finca</TableHead>
-                    <TableHead>Árboles</TableHead>
-                    <TableHead>Hectáreas</TableHead>
-                    <TableHead>Fecha de Inversión</TableHead>
-                    <TableHead>Monto</TableHead>
-                    <TableHead>Retorno Esperado</TableHead>
-                    <TableHead className="text-right">Acciones</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {userInvestments.map((investment) => (
-                    <TableRow key={investment.id}>
-                      <TableCell className="font-medium">
-                        {investment.farmName}
-                      </TableCell>
-                      <TableCell>{investment.trees.toLocaleString()}</TableCell>
-                      <TableCell>{investment.hectares}</TableCell>
-                      <TableCell>
-                        {new Date(investment.investmentDate).toLocaleDateString(
-                          "es-CO"
-                        )}
-                      </TableCell>
-                      <TableCell>
-                        {formatCurrency(investment.investmentAmount)}
-                      </TableCell>
-                      <TableCell className="text-green-600">
-                        +{investment.expectedReturn}%
-                      </TableCell>
-                      <TableCell className="text-right">
-                        <TooltipProvider>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button
-                                variant="ghost"
-                                size="icon"
-                                onClick={() =>
-                                  handleViewFarmOnMap(investment.farmId)
-                                }
-                              >
-                                <MapPin className="h-4 w-4" />
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              <p>Ver ubicación en el mapa</p>
-                            </TooltipContent>
-                          </Tooltip>
-                        </TooltipProvider>
-                        <TooltipProvider>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button variant="ghost" size="icon">
-                                <Trees className="h-4 w-4" />
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              <p>Ver detalle de la inversión</p>
-                            </TooltipContent>
-                          </Tooltip>
-                        </TooltipProvider>
-                        <Button variant="ghost" size="sm">
-                          Detalles
-                        </Button>
-                      </TableCell>
+            <CardContent className="p-0">
+              <div className="overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="text-xs">Finca</TableHead>
+                      <TableHead className="text-xs">Árboles</TableHead>
+                      <TableHead className="text-xs">Hectáreas</TableHead>
+                      <TableHead className="text-xs">Fecha de Inversión</TableHead>
+                      <TableHead className="text-xs">Monto</TableHead>
+                      <TableHead className="text-xs">Retorno Esperado</TableHead>
+                      <TableHead className="text-xs text-right">Acciones</TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                  </TableHeader>
+                  <TableBody>
+                    {userInvestments.map((investment) => (
+                      <TableRow key={investment.id}>
+                        <TableCell className="font-medium text-sm">
+                          {investment.farmName}
+                        </TableCell>
+                        <TableCell className="text-sm">{investment.trees.toLocaleString()}</TableCell>
+                        <TableCell className="text-sm">{investment.hectares}</TableCell>
+                        <TableCell className="text-sm">
+                          {new Date(investment.investmentDate).toLocaleDateString(
+                            "es-CO"
+                          )}
+                        </TableCell>
+                        <TableCell className="text-sm">
+                          {formatCurrency(investment.investmentAmount)}
+                        </TableCell>
+                        <TableCell className="text-green-600 text-sm">
+                          +{investment.expectedReturn}%
+                        </TableCell>
+                        <TableCell className="text-right">
+                          <div className="flex justify-end gap-1">
+                            <TooltipProvider>
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    onClick={() =>
+                                      handleViewFarmOnMap(investment.farmId)
+                                    }
+                                    className="h-8 w-8"
+                                  >
+                                    <MapPin className="h-4 w-4" />
+                                  </Button>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                  <p className="text-xs">Ver ubicación en el mapa</p>
+                                </TooltipContent>
+                              </Tooltip>
+                            </TooltipProvider>
+                            <Button variant="ghost" size="sm" className="text-xs">
+                              Detalles
+                            </Button>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
             </CardContent>
           </Card>
         </>
       ) : (
         // Map view
         <Card id="map-view">
-          <CardHeader>
-            <CardTitle>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-lg">
               Ubicación de mis Inversiones
               {selectedFarmId
                 ? `: ${
@@ -335,13 +333,13 @@ const Portfolio = () => {
                   }`
                 : ""}
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-xs">
               Visualiza la ubicación geográfica de las fincas donde has invertido
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="mb-4">
-              <p className="text-sm text-gray-500 mb-2">
+            <div className="mb-3">
+              <p className="text-xs text-gray-500 mb-2">
                 {selectedFarmId
                   ? "Finca seleccionada: " +
                     FARM_LOCATIONS.find((f) => f.id === selectedFarmId)?.name
@@ -351,6 +349,7 @@ const Portfolio = () => {
                 <Button
                   variant="outline"
                   size="sm"
+                  className="text-xs"
                   onClick={() => setSelectedFarmId(null)}
                 >
                   Ver todas las fincas
@@ -360,7 +359,7 @@ const Portfolio = () => {
             <div className="rounded-lg overflow-hidden border border-gray-200">
               <Map
                 highlightedFarmId={selectedFarmId || undefined}
-                height="500px"
+                height="450px"
               />
             </div>
           </CardContent>
@@ -369,19 +368,19 @@ const Portfolio = () => {
 
       {/* Call to action */}
       {hasInvestments && (
-        <Card className="bg-green-50 border-green-200">
-          <CardContent className="flex flex-col sm:flex-row items-center justify-between gap-4 p-6">
+        <Card className="bg-green-50 border-green-100">
+          <CardContent className="flex flex-col sm:flex-row items-center justify-between gap-4 p-4">
             <div>
-              <h3 className="text-lg font-semibold text-green-800 mb-1">
+              <h3 className="text-base font-semibold text-green-800 mb-1">
                 Amplía tu portafolio
               </h3>
-              <p className="text-green-700">
+              <p className="text-green-700 text-sm">
                 Aumenta tu inversión y diversifica tu portafolio de marañón
               </p>
             </div>
-            <Button asChild className="bg-green-700 hover:bg-green-800 whitespace-nowrap">
+            <Button asChild size="sm" className="bg-green-700 hover:bg-green-800 whitespace-nowrap">
               <Link to="/dashboard/purchase">
-                Comprar más árboles <ArrowRight className="ml-2 h-4 w-4" />
+                Comprar más árboles <ArrowRight className="ml-2 h-3 w-3" />
               </Link>
             </Button>
           </CardContent>
