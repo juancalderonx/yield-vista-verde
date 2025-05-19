@@ -19,7 +19,7 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import { Link } from "react-router-dom";
 import { formatCurrency } from "@/lib/calculators";
-import { ArrowRight, Filter, MapPin, Tree } from "lucide-react";
+import { ArrowRight, Filter, MapPin, Trees } from "lucide-react";
 import Map from "@/components/Map";
 import {
   ChartContainer,
@@ -132,7 +132,7 @@ const Portfolio = () => {
         <Card className="bg-gray-50 border-dashed border-2 border-gray-300">
           <CardContent className="flex flex-col items-center justify-center py-12">
             <div className="rounded-full bg-gray-200 p-4 mb-4">
-              <Tree className="h-12 w-12 text-gray-400" />
+              <Trees className="h-12 w-12 text-gray-400" />
             </div>
             <h3 className="text-xl font-semibold text-gray-700 mb-2">
               Aún no tienes inversiones

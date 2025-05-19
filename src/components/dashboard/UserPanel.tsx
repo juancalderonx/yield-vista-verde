@@ -1,4 +1,3 @@
-
 import {
   Card,
   CardContent,
@@ -7,7 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Bell, Info, Tree } from "lucide-react";
+import { ArrowRight, Bell, Info, Trees } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { Link } from "react-router-dom";
 import { formatCurrency } from "@/lib/calculators";
@@ -50,7 +49,7 @@ const UserPanel = () => {
       actionText: "Comprar árboles",
       link: "/dashboard/portfolio",
       color: "bg-green-50 border-green-200",
-      icon: <Tree className="h-6 w-6 text-green-600" />,
+      icon: <Trees className="h-6 w-6 text-green-600" />,
     },
     {
       title: "Explora tus fincas",
@@ -137,7 +136,7 @@ const UserPanel = () => {
           </CardHeader>
           <CardContent>
             <div className="flex items-center text-sm">
-              <Tree className="h-4 w-4 mr-1 text-green-600" />
+              <Trees className="h-4 w-4 mr-1 text-green-600" />
               <span>Tus árboles crecen sanos en el Vichada</span>
             </div>
           </CardContent>
