@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import {
   Card,
@@ -304,7 +303,7 @@ const Portfolio = () => {
                           <Tooltip>
                             <TooltipTrigger asChild>
                               <Button variant="ghost" size="icon">
-                                <Tree className="h-4 w-4" />
+                                <Trees className="h-4 w-4" />
                               </Button>
                             </TooltipTrigger>
                             <TooltipContent>
