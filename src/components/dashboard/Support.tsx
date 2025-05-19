@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import {
   Card,
@@ -5,6 +6,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
+  CardFooter,
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -119,85 +121,86 @@ const Support = () => {
   ];
 
   return (
-    <div className="space-y-6">
-      <h2 className="text-3xl font-bold text-gray-900">Centro de Soporte</h2>
+    <div className="space-y-5">
+      <h2 className="text-2xl font-semibold text-gray-800">Centro de Soporte</h2>
 
-      <div className="grid md:grid-cols-3 gap-6">
-        <Card className="bg-gradient-to-br from-green-50 to-green-100 border-green-200">
-          <CardContent className="p-6 flex flex-col items-center text-center">
-            <div className="w-12 h-12 bg-green-200 rounded-full flex items-center justify-center mb-4">
-              <Phone className="h-6 w-6 text-green-700" />
+      {/* Contact Cards - More compact and modern */}
+      <div className="grid md:grid-cols-3 gap-4">
+        <Card className="border-0 shadow-sm bg-gradient-to-br from-green-50 to-green-100 overflow-hidden">
+          <CardContent className="p-5 flex flex-col items-center text-center">
+            <div className="w-10 h-10 bg-green-200 rounded-full flex items-center justify-center mb-3">
+              <Phone className="h-5 w-5 text-green-700" />
             </div>
-            <h3 className="text-lg font-semibold text-green-800 mb-2">
+            <h3 className="text-base font-medium text-green-800 mb-1">
               Línea Directa
             </h3>
-            <p className="text-gray-600 mb-4">
-              Atención personalizada para inversionistas
+            <p className="text-sm text-gray-600 mb-3">
+              Atención personalizada
             </p>
-            <p className="text-green-700 font-medium">+57 (601) 123-4567</p>
-            <p className="text-sm text-gray-500 mt-1">Lun-Vie: 8:00 - 18:00</p>
+            <p className="text-green-700 font-medium text-sm">+57 (601) 123-4567</p>
+            <p className="text-xs text-gray-500 mt-1">Lun-Vie: 8:00 - 18:00</p>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
-          <CardContent className="p-6 flex flex-col items-center text-center">
-            <div className="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center mb-4">
-              <Mail className="h-6 w-6 text-blue-700" />
+        <Card className="border-0 shadow-sm bg-gradient-to-br from-blue-50 to-blue-100 overflow-hidden">
+          <CardContent className="p-5 flex flex-col items-center text-center">
+            <div className="w-10 h-10 bg-blue-200 rounded-full flex items-center justify-center mb-3">
+              <Mail className="h-5 w-5 text-blue-700" />
             </div>
-            <h3 className="text-lg font-semibold text-blue-800 mb-2">
+            <h3 className="text-base font-medium text-blue-800 mb-1">
               Correo Electrónico
             </h3>
-            <p className="text-gray-600 mb-4">
-              Escríbenos en cualquier momento
+            <p className="text-sm text-gray-600 mb-3">
+              Escríbenos
             </p>
-            <p className="text-blue-700 font-medium">soporte@greenyield.co</p>
-            <p className="text-sm text-gray-500 mt-1">Respuesta en 24 horas</p>
+            <p className="text-blue-700 font-medium text-sm">soporte@greenyield.co</p>
+            <p className="text-xs text-gray-500 mt-1">Respuesta en 24 horas</p>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-amber-50 to-amber-100 border-amber-200">
-          <CardContent className="p-6 flex flex-col items-center text-center">
-            <div className="w-12 h-12 bg-amber-200 rounded-full flex items-center justify-center mb-4">
-              <MessageSquare className="h-6 w-6 text-amber-700" />
+        <Card className="border-0 shadow-sm bg-gradient-to-br from-amber-50 to-amber-100 overflow-hidden">
+          <CardContent className="p-5 flex flex-col items-center text-center">
+            <div className="w-10 h-10 bg-amber-200 rounded-full flex items-center justify-center mb-3">
+              <MessageSquare className="h-5 w-5 text-amber-700" />
             </div>
-            <h3 className="text-lg font-semibold text-amber-800 mb-2">
+            <h3 className="text-base font-medium text-amber-800 mb-1">
               Chat en Vivo
             </h3>
-            <p className="text-gray-600 mb-4">
-              Asistencia inmediata para consultas
+            <p className="text-sm text-gray-600 mb-3">
+              Asistencia inmediata
             </p>
-            <Button className="bg-amber-600 hover:bg-amber-700">
+            <Button className="bg-amber-600 hover:bg-amber-700 text-xs h-8 px-3">
               Iniciar Chat
             </Button>
-            <p className="text-sm text-gray-500 mt-3">
-              <span className="inline-block w-2 h-2 rounded-full bg-green-500 mr-1"></span>
+            <p className="text-xs text-gray-500 mt-2">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-green-500 mr-1"></span>
               Disponible ahora
             </p>
           </CardContent>
         </Card>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-8">
-        <div className="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center">
-                <HelpCircle className="h-5 w-5 mr-2 text-green-600" />
+      <div className="grid lg:grid-cols-2 gap-6">
+        <div className="space-y-4">
+          {/* FAQ Section - Modern and clean */}
+          <Card className="border-0 shadow-sm overflow-hidden">
+            <CardHeader className="pb-2 pt-4 px-5">
+              <CardTitle className="flex items-center text-lg font-medium">
+                <HelpCircle className="h-4 w-4 mr-2 text-green-600" />
                 Preguntas Frecuentes
               </CardTitle>
-              <CardDescription>
-                Respuestas a las consultas más comunes de nuestros
-                inversionistas
+              <CardDescription className="text-xs">
+                Respuestas a las consultas más comunes
               </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="px-5 py-2">
               <Accordion type="single" collapsible className="w-full">
                 {faqs.map((faq) => (
-                  <AccordionItem key={faq.id} value={faq.id}>
-                    <AccordionTrigger className="font-medium text-green-800 hover:text-green-600">
+                  <AccordionItem key={faq.id} value={faq.id} className="border-b border-gray-100">
+                    <AccordionTrigger className="text-sm font-medium text-green-800 hover:text-green-600 py-3">
                       {faq.question}
                     </AccordionTrigger>
-                    <AccordionContent className="text-gray-700">
+                    <AccordionContent className="text-sm text-gray-600 pb-4">
                       {faq.answer}
                     </AccordionContent>
                   </AccordionItem>
@@ -206,84 +209,91 @@ const Support = () => {
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center">
-                <Clock className="h-5 w-5 mr-2 text-green-600" />
+          {/* Request Status - Cleaner design */}
+          <Card className="border-0 shadow-sm overflow-hidden">
+            <CardHeader className="pb-2 pt-4 px-5">
+              <CardTitle className="flex items-center text-lg font-medium">
+                <Clock className="h-4 w-4 mr-2 text-green-600" />
                 Estado de Solicitudes
               </CardTitle>
-              <CardDescription>
-                Seguimiento de tus solicitudes de soporte recientes
+              <CardDescription className="text-xs">
+                Seguimiento de tus solicitudes recientes
               </CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="bg-green-50 p-4 rounded-lg border border-green-100 flex items-start">
-                  <div className="flex-shrink-0 mr-3">
-                    <CheckCircle2 className="h-5 w-5 text-green-600" />
+            <CardContent className="px-5 py-2">
+              <div className="space-y-3">
+                <div className="bg-green-50 p-3 rounded-md border border-green-100 flex items-start">
+                  <div className="flex-shrink-0 mr-3 mt-0.5">
+                    <CheckCircle2 className="h-4 w-4 text-green-600" />
                   </div>
                   <div>
-                    <p className="font-medium text-gray-900">
+                    <p className="font-medium text-sm text-gray-800">
                       Solicitud #12345 - Resuelta
                     </p>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-xs text-gray-600">
                       Consulta sobre proceso de reinversión
                     </p>
                     <p className="text-xs text-gray-500 mt-1">
-                      Actualizado: 17-05-2024
+                      17-05-2024
                     </p>
                   </div>
                 </div>
 
-                <div className="bg-amber-50 p-4 rounded-lg border border-amber-100 flex items-start">
-                  <div className="flex-shrink-0 mr-3">
-                    <Clock className="h-5 w-5 text-amber-600" />
+                <div className="bg-amber-50 p-3 rounded-md border border-amber-100 flex items-start">
+                  <div className="flex-shrink-0 mr-3 mt-0.5">
+                    <Clock className="h-4 w-4 text-amber-600" />
                   </div>
                   <div>
-                    <p className="font-medium text-gray-900">
+                    <p className="font-medium text-sm text-gray-800">
                       Solicitud #12380 - En proceso
                     </p>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-xs text-gray-600">
                       Coordinación de visita a finca
                     </p>
                     <p className="text-xs text-gray-500 mt-1">
-                      Actualizado: 15-05-2024
+                      15-05-2024
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-6 text-center">
-                <Button variant="outline">Ver todas las solicitudes</Button>
+              <div className="mt-4 text-center">
+                <Button variant="outline" size="sm" className="text-xs h-8">
+                  Ver todas las solicitudes
+                </Button>
               </div>
             </CardContent>
           </Card>
         </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Formulario de Contacto</CardTitle>
-            <CardDescription>
-              Envíanos tu consulta y te responderemos a la brevedad
+        {/* Contact Form - Modern design */}
+        <Card className="border-0 shadow-sm">
+          <CardHeader className="pb-2 pt-4 px-5">
+            <CardTitle className="text-lg font-medium">
+              Formulario de Contacto
+            </CardTitle>
+            <CardDescription className="text-xs">
+              Envíanos tu consulta y te responderemos pronto
             </CardDescription>
           </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <Label htmlFor="name">Nombre Completo *</Label>
+          <CardContent className="px-5 pb-2 pt-2">
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <Label htmlFor="name" className="text-xs">Nombre Completo *</Label>
                   <Input
                     id="name"
                     name="name"
                     value={supportForm.name}
                     onChange={handleInputChange}
                     placeholder="Tu nombre"
+                    className="h-9 text-sm"
                     required
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="email">Correo Electrónico *</Label>
+                <div className="space-y-1.5">
+                  <Label htmlFor="email" className="text-xs">Correo Electrónico *</Label>
                   <Input
                     id="email"
                     name="email"
@@ -291,14 +301,15 @@ const Support = () => {
                     value={supportForm.email}
                     onChange={handleInputChange}
                     placeholder="email@ejemplo.com"
+                    className="h-9 text-sm"
                     required
                   />
                 </div>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <Label htmlFor="category">Categoría *</Label>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <Label htmlFor="category" className="text-xs">Categoría *</Label>
                   <Select
                     value={supportForm.category}
                     onValueChange={(value) =>
@@ -306,7 +317,7 @@ const Support = () => {
                     }
                     required
                   >
-                    <SelectTrigger id="category">
+                    <SelectTrigger id="category" className="h-9 text-sm">
                       <SelectValue placeholder="Selecciona una categoría" />
                     </SelectTrigger>
                     <SelectContent>
@@ -320,47 +331,49 @@ const Support = () => {
                   </Select>
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="subject">Asunto</Label>
+                <div className="space-y-1.5">
+                  <Label htmlFor="subject" className="text-xs">Asunto</Label>
                   <Input
                     id="subject"
                     name="subject"
                     value={supportForm.subject}
                     onChange={handleInputChange}
                     placeholder="Asunto de tu consulta"
+                    className="h-9 text-sm"
                   />
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="message">Mensaje *</Label>
+              <div className="space-y-1.5">
+                <Label htmlFor="message" className="text-xs">Mensaje *</Label>
                 <Textarea
                   id="message"
                   name="message"
                   value={supportForm.message}
                   onChange={handleInputChange}
                   placeholder="Escribe tu mensaje detallado aquí"
-                  rows={6}
+                  rows={4}
+                  className="text-sm"
                   required
                 />
               </div>
 
               <div className="flex items-start space-x-2">
-                <AlertCircle className="h-5 w-5 text-amber-500 mt-0.5 flex-shrink-0" />
-                <p className="text-sm text-gray-600">
+                <AlertCircle className="h-4 w-4 text-amber-500 mt-0.5 flex-shrink-0" />
+                <p className="text-xs text-gray-600">
                   Nuestro equipo responderá a tu consulta en un plazo máximo de
                   24 horas hábiles.
                 </p>
               </div>
 
-              <div className="flex justify-end">
+              <CardFooter className="px-0 pt-2 pb-0 flex justify-end">
                 <Button
                   type="submit"
-                  className="bg-green-600 hover:bg-green-700"
+                  className="bg-green-600 hover:bg-green-700 text-sm h-9"
                 >
                   Enviar Consulta
                 </Button>
-              </div>
+              </CardFooter>
             </form>
           </CardContent>
         </Card>
