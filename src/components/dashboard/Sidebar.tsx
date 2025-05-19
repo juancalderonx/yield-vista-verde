@@ -1,9 +1,11 @@
+
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { useAuth } from "@/hooks/useAuth";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import {
   LayoutDashboard,
   Landmark,
@@ -74,7 +76,7 @@ const Sidebar = () => {
     return location.pathname === path;
   };
 
-  const sidebarClassName = `fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-gray-200 transition-all duration-300
+  const sidebarClassName = `fixed inset-y-0 left-0 z-50 w-64 bg-sidebar border-r border-sidebar-border transition-all duration-300
     ${collapsed ? "w-20" : "w-64"} 
     ${mobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`;
 
@@ -103,12 +105,12 @@ const Sidebar = () => {
           <div className="flex items-center justify-between h-16 px-4">
             <Link to="/" className="flex items-center gap-2">
               {!collapsed && (
-                <span className="text-xl font-bold text-green-700">
-                  Green<span className="text-green-500">Yield</span>
+                <span className="text-xl font-bold text-green-700 dark:text-green-500">
+                  Green<span className="text-green-500 dark:text-green-400">Yield</span>
                 </span>
               )}
               {collapsed && (
-                <span className="text-xl font-bold text-green-700">G</span>
+                <span className="text-xl font-bold text-green-700 dark:text-green-500">G</span>
               )}
             </Link>
 
@@ -142,8 +144,8 @@ const Sidebar = () => {
                   variant={isActive(link.path) ? "default" : "ghost"}
                   className={`justify-start ${
                     isActive(link.path)
-                      ? "bg-green-600 hover:bg-green-700 text-white"
-                      : "text-gray-600 hover:text-green-700"
+                      ? "bg-green-600 dark:bg-green-700 hover:bg-green-700 dark:hover:bg-green-600 text-white"
+                      : "text-gray-600 dark:text-gray-300 hover:text-green-700 dark:hover:text-green-400"
                   }`}
                 >
                   <Link
@@ -160,10 +162,12 @@ const Sidebar = () => {
 
             <Separator className="my-4" />
 
-            <div className="py-4">
+            <div className="py-4 flex flex-col gap-2">
+              {!collapsed && <ThemeToggle />}
+              
               <Button
                 variant="outline"
-                className="w-full justify-start border-red-200 text-red-600 hover:text-red-700 hover:bg-red-50"
+                className="w-full justify-start border-red-200 text-red-600 hover:text-red-700 hover:bg-red-50 dark:border-red-900 dark:text-red-400 dark:hover:bg-red-950/50"
                 onClick={logout}
               >
                 <LogOut className="h-5 w-5 mr-3" />
