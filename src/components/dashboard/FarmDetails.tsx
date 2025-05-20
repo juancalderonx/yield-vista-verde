@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -7,7 +6,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Info, Water, Plant, TrendingUp, Database, ChartBar, ThermometerSun, Trees } from "lucide-react";
+import { Info, Droplets, Leaf, TrendingUp, Database, BarChart, Thermometer, TreePine, MapPin } from "lucide-react";
 import Map from "@/components/Map";
 import { FARM_LOCATIONS } from "@/lib/constants";
 import FarmPlant3DView from "./FarmPlant3DView";
@@ -120,7 +119,7 @@ const FarmDetails = ({ farmId, onClose, open }: FarmDetailsProps) => {
               <Card>
                 <CardHeader className="pb-2">
                   <CardTitle className="text-lg flex items-center gap-2">
-                    <Plant className="h-4 w-4 text-green-600" />
+                    <Leaf className="h-4 w-4 text-green-600" />
                     Producción
                   </CardTitle>
                 </CardHeader>
@@ -165,7 +164,7 @@ const FarmDetails = ({ farmId, onClose, open }: FarmDetailsProps) => {
               <Card>
                 <CardHeader className="pb-2">
                   <CardTitle className="text-lg flex items-center gap-2">
-                    <Water className="h-4 w-4 text-blue-600" /> 
+                    <Droplets className="h-4 w-4 text-blue-600" /> 
                     Recursos Hídricos
                   </CardTitle>
                 </CardHeader>
@@ -244,7 +243,7 @@ const FarmDetails = ({ farmId, onClose, open }: FarmDetailsProps) => {
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg font-semibold">Detalle de Plantaciones</h3>
               <Button onClick={() => setShow3DView(true)} variant="outline" className="flex items-center gap-2">
-                <Trees className="h-4 w-4" />
+                <TreePine className="h-4 w-4" />
                 Ver Visualización 3D
               </Button>
             </div>
@@ -254,7 +253,7 @@ const FarmDetails = ({ farmId, onClose, open }: FarmDetailsProps) => {
                 <Card key={plant.id} className="overflow-hidden border-l-4" style={{ borderLeftColor: `rgb(${Math.floor(255 * (1 - plant.health/100))}, ${Math.floor(255 * plant.health/100)}, 0)` }}>
                   <CardHeader className="pb-2">
                     <CardTitle className="text-lg flex items-center gap-2">
-                      <Plant className="h-4 w-4 text-green-600" />
+                      <Leaf className="h-4 w-4 text-green-600" />
                       {plant.type} #{plant.id}
                     </CardTitle>
                     <CardDescription>Plantado: {plant.planted}</CardDescription>
@@ -314,7 +313,7 @@ const FarmDetails = ({ farmId, onClose, open }: FarmDetailsProps) => {
             <Card>
               <CardHeader className="pb-2">
                 <CardTitle className="text-lg flex items-center gap-2">
-                  <ChartBar className="h-4 w-4 text-green-600" />
+                  <BarChart className="h-4 w-4 text-green-600" />
                   Transacciones Recientes
                 </CardTitle>
               </CardHeader>
@@ -350,7 +349,7 @@ const FarmDetails = ({ farmId, onClose, open }: FarmDetailsProps) => {
               <Card>
                 <CardHeader className="pb-2">
                   <CardTitle className="text-lg flex items-center gap-2">
-                    <ThermometerSun className="h-4 w-4 text-amber-500" />
+                    <Thermometer className="h-4 w-4 text-amber-500" />
                     Clima Actual
                   </CardTitle>
                 </CardHeader>
@@ -385,7 +384,7 @@ const FarmDetails = ({ farmId, onClose, open }: FarmDetailsProps) => {
               <Card>
                 <CardHeader className="pb-2">
                   <CardTitle className="text-lg flex items-center gap-2">
-                    <Plant className="h-4 w-4 text-green-600" />
+                    <Leaf className="h-4 w-4 text-green-600" />
                     Análisis de Suelo
                   </CardTitle>
                 </CardHeader>
@@ -415,7 +414,7 @@ const FarmDetails = ({ farmId, onClose, open }: FarmDetailsProps) => {
             <Card>
               <CardHeader className="pb-2">
                 <CardTitle className="text-lg flex items-center gap-2">
-                  <Trees className="h-4 w-4 text-green-700" />
+                  <TreePine className="h-4 w-4 text-green-700" />
                   Impacto Ambiental
                 </CardTitle>
               </CardHeader>
