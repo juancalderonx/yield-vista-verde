@@ -7,12 +7,14 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { MapPin, BarChart, Info } from "lucide-react";
 import { FARM_LOCATIONS } from "@/lib/constants";
 import Map from "@/components/Map";
+import FarmDetails from "./FarmDetails";
 
 type ViewMode = "grid" | "map" | "table";
 
 export const Farms = () => {
   const [viewMode, setViewMode] = useState<ViewMode>("grid");
   const [selectedFarmId, setSelectedFarmId] = useState<number | null>(null);
+  const [showFarmDetails, setShowFarmDetails] = useState(false);
 
   const handleViewMap = (farmId: number) => {
     setSelectedFarmId(farmId);
@@ -25,14 +27,14 @@ export const Farms = () => {
   };
 
   const handleViewDetails = (farmId: number) => {
-    // Aquí se implementaría la lógica para ver detalles
-    console.log(`Ver detalles de la finca ID: ${farmId}`);
+    setSelectedFarmId(farmId);
+    setShowFarmDetails(true);
   };
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-3xl font-bold text-gray-900">Nuestras Fincas</h2>
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Nuestras Fincas</h2>
         <div className="flex space-x-2">
           <Button
             variant={viewMode === "grid" ? "default" : "outline"}
@@ -59,7 +61,7 @@ export const Farms = () => {
       </div>
 
       {viewMode === "map" ? (
-        <div className="bg-white p-6 rounded-xl shadow">
+        <div className="bg-card p-6 rounded-xl shadow">
           <div className="h-[600px]">
             <Map height="100%" highlightedFarmId={selectedFarmId} />
             <div className="mt-4">
@@ -73,22 +75,22 @@ export const Farms = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {FARM_LOCATIONS.map((farm) => (
             <Card key={farm.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-              <CardHeader className="bg-green-50 border-b pb-3">
-                <CardTitle className="text-lg text-green-800">{farm.name}</CardTitle>
+              <CardHeader className="bg-secondary/50 dark:bg-secondary/20 border-b pb-3">
+                <CardTitle className="text-lg text-primary-foreground">{farm.name}</CardTitle>
               </CardHeader>
               <CardContent className="pt-4">
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600">Hectáreas totales:</span>
+                    <span className="text-sm text-muted-foreground">Hectáreas totales:</span>
                     <span className="font-medium">{farm.hectares}</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600">Disponibles:</span>
-                    <span className="font-medium text-green-600">{farm.available} ha</span>
+                    <span className="text-sm text-muted-foreground">Disponibles:</span>
+                    <span className="font-medium text-green-600 dark:text-green-400">{farm.available} ha</span>
                   </div>
                 </div>
               </CardContent>
-              <CardFooter className="flex justify-between bg-gray-50 pt-3 pb-2">
+              <CardFooter className="flex justify-between bg-muted/30 pt-3 pb-2">
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
@@ -96,9 +98,9 @@ export const Farms = () => {
                         variant="ghost"
                         size="sm"
                         onClick={() => handleViewMap(farm.id)}
-                        className="hover:bg-green-100"
+                        className="hover:bg-green-100 dark:hover:bg-green-900/30"
                       >
-                        <MapPin className="h-5 w-5 text-green-700" />
+                        <MapPin className="h-5 w-5 text-green-700 dark:text-green-500" />
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -112,9 +114,9 @@ export const Farms = () => {
                         variant="ghost"
                         size="sm"
                         onClick={() => handleViewInvestments(farm.id)}
-                        className="hover:bg-green-100"
+                        className="hover:bg-green-100 dark:hover:bg-green-900/30"
                       >
-                        <BarChart className="h-5 w-5 text-blue-600" />
+                        <BarChart className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -128,9 +130,9 @@ export const Farms = () => {
                         variant="ghost"
                         size="sm"
                         onClick={() => handleViewDetails(farm.id)}
-                        className="hover:bg-green-100"
+                        className="hover:bg-green-100 dark:hover:bg-green-900/30"
                       >
-                        <Info className="h-5 w-5 text-gray-700" />
+                        <Info className="h-5 w-5 text-gray-700 dark:text-gray-300" />
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -143,7 +145,7 @@ export const Farms = () => {
           ))}
         </div>
       ) : (
-        <div className="bg-white rounded-xl shadow overflow-hidden">
+        <div className="bg-card rounded-xl shadow overflow-hidden">
           <Table>
             <TableHeader>
               <TableRow>
@@ -155,10 +157,10 @@ export const Farms = () => {
             </TableHeader>
             <TableBody>
               {FARM_LOCATIONS.map((farm) => (
-                <TableRow key={farm.id} className="hover:bg-gray-50">
+                <TableRow key={farm.id} className="hover:bg-muted/40">
                   <TableCell className="font-medium">{farm.name}</TableCell>
                   <TableCell className="text-right">{farm.hectares}</TableCell>
-                  <TableCell className="text-right text-green-600">{farm.available}</TableCell>
+                  <TableCell className="text-right text-green-600 dark:text-green-400">{farm.available}</TableCell>
                   <TableCell>
                     <div className="flex justify-center space-x-2">
                       <TooltipProvider>
@@ -168,9 +170,9 @@ export const Farms = () => {
                               variant="ghost"
                               size="sm"
                               onClick={() => handleViewMap(farm.id)}
-                              className="hover:bg-green-100"
+                              className="hover:bg-green-100 dark:hover:bg-green-900/30"
                             >
-                              <MapPin className="h-4 w-4 text-green-700" />
+                              <MapPin className="h-4 w-4 text-green-700 dark:text-green-500" />
                             </Button>
                           </TooltipTrigger>
                           <TooltipContent>
@@ -184,9 +186,9 @@ export const Farms = () => {
                               variant="ghost"
                               size="sm"
                               onClick={() => handleViewInvestments(farm.id)}
-                              className="hover:bg-green-100"
+                              className="hover:bg-green-100 dark:hover:bg-green-900/30"
                             >
-                              <BarChart className="h-4 w-4 text-blue-600" />
+                              <BarChart className="h-4 w-4 text-blue-600 dark:text-blue-400" />
                             </Button>
                           </TooltipTrigger>
                           <TooltipContent>
@@ -200,9 +202,9 @@ export const Farms = () => {
                               variant="ghost"
                               size="sm"
                               onClick={() => handleViewDetails(farm.id)}
-                              className="hover:bg-green-100"
+                              className="hover:bg-green-100 dark:hover:bg-green-900/30"
                             >
-                              <Info className="h-4 w-4 text-gray-700" />
+                              <Info className="h-4 w-4 text-gray-700 dark:text-gray-300" />
                             </Button>
                           </TooltipTrigger>
                           <TooltipContent>
@@ -218,6 +220,13 @@ export const Farms = () => {
           </Table>
         </div>
       )}
+
+      {/* Farm Details Dialog */}
+      <FarmDetails 
+        farmId={selectedFarmId}
+        open={showFarmDetails}
+        onClose={() => setShowFarmDetails(false)}
+      />
     </div>
   );
 };
