@@ -1,10 +1,14 @@
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Footer = () => {
+  const { t } = useLanguage();
+
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Suscripción enviada");
@@ -32,27 +36,27 @@ const Footer = () => {
             >
               <Input
                 type="email"
-                placeholder="Tu correo electrónico"
+                placeholder={t("footer.email")}
                 className="bg-green-800 border-green-700 text-white placeholder:text-green-300"
               />
               <Button
                 type="submit"
                 className="bg-green-500 hover:bg-green-400 text-white shrink-0"
               >
-                Suscribirse
+                {t("footer.subscribe")}
               </Button>
             </form>
           </div>
 
           <div>
-            <h3 className="font-bold text-lg mb-6">Enlaces rápidos</h3>
+            <h3 className="font-bold text-lg mb-6">{t("footer.quickLinks")}</h3>
             <ul className="space-y-4">
               <li>
                 <a
                   href="#"
                   className="text-green-200 hover:text-white transition-colors"
                 >
-                  Inicio
+                  {t("nav.home")}
                 </a>
               </li>
               <li>
@@ -60,7 +64,7 @@ const Footer = () => {
                   href="#farms"
                   className="text-green-200 hover:text-white transition-colors"
                 >
-                  Fincas
+                  {t("nav.farms")}
                 </a>
               </li>
               <li>
@@ -68,7 +72,7 @@ const Footer = () => {
                   href="#investment"
                   className="text-green-200 hover:text-white transition-colors"
                 >
-                  Inversión
+                  {t("nav.investment")}
                 </a>
               </li>
               <li>
@@ -76,7 +80,7 @@ const Footer = () => {
                   href="#calculator"
                   className="text-green-200 hover:text-white transition-colors"
                 >
-                  Calculadora
+                  {t("nav.calculator")}
                 </a>
               </li>
               <li>
@@ -84,25 +88,25 @@ const Footer = () => {
                   href="#about"
                   className="text-green-200 hover:text-white transition-colors"
                 >
-                  Nosotros
+                  {t("nav.about")}
                 </a>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 className="font-bold text-lg mb-6">Contacto</h3>
+            <h3 className="font-bold text-lg mb-6">{t("footer.contact")}</h3>
             <ul className="space-y-4">
               <li className="text-green-200">
-                <span className="block text-white font-medium">Dirección</span>
+                <span className="block text-white font-medium">{t("footer.address")}</span>
                 Calle 93 #11-36, Bogotá, Colombia
               </li>
               <li className="text-green-200">
-                <span className="block text-white font-medium">Teléfono</span>
+                <span className="block text-white font-medium">{t("footer.phone")}</span>
                 +57 (601) 123-4567
               </li>
               <li className="text-green-200">
-                <span className="block text-white font-medium">Email</span>
+                <span className="block text-white font-medium">{t("footer.email.label")}</span>
                 info@greenyield.co
               </li>
             </ul>
@@ -113,21 +117,20 @@ const Footer = () => {
 
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-green-300 text-sm mb-4 md:mb-0">
-            © {new Date().getFullYear()} GreenYield. Todos los derechos
-            reservados.
+            © {new Date().getFullYear()} GreenYield. {t("footer.rights")}
           </p>
           <div className="flex items-center space-x-8">
             <a
               href="#"
               className="text-green-300 hover:text-white transition-colors text-sm"
             >
-              Términos y Condiciones
+              {t("footer.terms")}
             </a>
             <a
               href="#"
               className="text-green-300 hover:text-white transition-colors text-sm"
             >
-              Política de Privacidad
+              {t("footer.privacy")}
             </a>
             <Button
               asChild
@@ -136,7 +139,7 @@ const Footer = () => {
               className="text-white hover:bg-green-800"
             >
               <Link to="/login" className="flex items-center">
-                Acceder <ArrowRight className="ml-1 h-4 w-4" />
+                {t("nav.login")} <ArrowRight className="ml-1 h-4 w-4" />
               </Link>
             </Button>
           </div>

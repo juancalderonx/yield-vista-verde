@@ -1,9 +1,12 @@
+
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { useAuth } from "@/hooks/useAuth";
+import { useLanguage } from "@/contexts/LanguageContext";
+import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
 import {
   LayoutDashboard,
   Landmark,
@@ -20,6 +23,7 @@ import {
 
 const Sidebar = () => {
   const { logout } = useAuth();
+  const { t } = useLanguage();
   const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -35,37 +39,37 @@ const Sidebar = () => {
   const links = [
     {
       path: "/dashboard",
-      label: "Panel Principal",
+      label: t("sidebar.dashboard"),
       icon: <LayoutDashboard className="h-5 w-5" />,
     },
     {
       path: "/dashboard/portfolio",
-      label: "Mi Portafolio",
+      label: t("sidebar.portfolio"),
       icon: <Landmark className="h-5 w-5" />,
     },
     {
       path: "/dashboard/calculator",
-      label: "Calculadora",
+      label: t("sidebar.calculator"),
       icon: <LineChart className="h-5 w-5" />,
     },
     {
       path: "/dashboard/farms",
-      label: "Fincas",
+      label: t("sidebar.farms"),
       icon: <MapPin className="h-5 w-5" />,
     },
     {
       path: "/dashboard/balance",
-      label: "Mi Balance",
+      label: t("sidebar.balance"),
       icon: <WalletCards className="h-5 w-5" />,
     },
     {
       path: "/dashboard/kyc",
-      label: "Verificación KYC",
+      label: t("sidebar.kyc"),
       icon: <UserCheck className="h-5 w-5" />,
     },
     {
       path: "/dashboard/support",
-      label: "Soporte",
+      label: t("sidebar.support"),
       icon: <HelpCircle className="h-5 w-5" />,
     },
   ];
@@ -159,6 +163,8 @@ const Sidebar = () => {
             </nav>
 
             <Separator className="my-4" />
+            
+            {!collapsed && <LanguageSwitcher variant="sidebar" />}
 
             <div className="py-4">
               <Button
@@ -167,7 +173,7 @@ const Sidebar = () => {
                 onClick={logout}
               >
                 <LogOut className="h-5 w-5 mr-3" />
-                {!collapsed && <span>Cerrar Sesión</span>}
+                {!collapsed && <span>{t("sidebar.logout")}</span>}
               </Button>
             </div>
           </ScrollArea>

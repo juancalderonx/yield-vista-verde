@@ -1,8 +1,12 @@
+
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Hero = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="pt-32 pb-24 bg-gradient-to-b from-green-50 to-white relative overflow-hidden">
       <div className="absolute inset-0 bg-cashew-pattern opacity-5 z-0"></div>
@@ -10,12 +14,10 @@ const Hero = () => {
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="space-y-6 animate-fade-in-up">
             <h1 className="text-5xl md:text-6xl font-bold text-green-900 leading-tight">
-              Invierte en el futuro del{" "}
-              <span className="text-green-600">marañón colombiano</span>
+              {t("hero.title")}
             </h1>
             <p className="text-xl text-gray-700 max-w-lg">
-              Diversifica tu portafolio con inversiones agrícolas transparentes
-              y rentables, respaldadas por un modelo fiduciario seguro.
+              {t("hero.subtitle")}
             </p>
             <div className="flex flex-wrap gap-4">
               <Button
@@ -24,7 +26,7 @@ const Hero = () => {
                 className="bg-green-600 hover:bg-green-700 text-white font-medium"
               >
                 <Link to="/login">
-                  Comienza a invertir <ArrowRight className="ml-2 h-4 w-4" />
+                  {t("hero.cta.invest")} <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <Button
@@ -33,26 +35,26 @@ const Hero = () => {
                 variant="outline"
                 className="border-green-600 text-green-700 hover:bg-green-50"
               >
-                <a href="#calculator">Calcular rentabilidad</a>
+                <a href="#calculator">{t("hero.cta.calculator")}</a>
               </Button>
             </div>
             <div className="flex flex-wrap gap-6 pt-6">
               <div className="flex flex-col">
                 <span className="text-3xl font-bold text-green-600">12%</span>
                 <span className="text-sm text-gray-600">
-                  Rendimiento anual promedio
+                  {t("hero.stats.return")}
                 </span>
               </div>
               <div className="flex flex-col">
                 <span className="text-3xl font-bold text-green-600">100%</span>
                 <span className="text-sm text-gray-600">
-                  Transparencia en la inversión
+                  {t("hero.stats.transparency")}
                 </span>
               </div>
               <div className="flex flex-col">
                 <span className="text-3xl font-bold text-green-600">5</span>
                 <span className="text-sm text-gray-600">
-                  Años de tiempo mínimo
+                  {t("hero.stats.years")}
                 </span>
               </div>
             </div>
